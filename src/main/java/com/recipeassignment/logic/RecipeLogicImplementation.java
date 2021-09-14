@@ -40,13 +40,13 @@ public class RecipeLogicImplementation implements RecipeLogic {
     }
 
     public RecipeLogicImplementation() {
-        // CloseableHttpClient httpClient = HttpClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier())
-        //         .build();
+        CloseableHttpClient httpClient = HttpClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier())
+                .build();
                 
-        // HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
-        // requestFactory.setHttpClient(httpClient);
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        requestFactory.setHttpClient(httpClient);
 
-        this.restTemplate = new RestTemplate();
+        this.restTemplate = new RestTemplate(requestFactory);
         // since the api key is a private key, cannot be on the repository. read it from
         // the system environment variables
         apiKey = System.getenv("API_KEY_SPOONACULAR");
